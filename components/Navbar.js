@@ -24,7 +24,7 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 
-export default function Navbar({ user, setIsSidebarOpen,isNonMobile }) {
+export default function Navbar({ user, setIsSidebarOpen, isNonMobile }) {
   const dispatch = useDispatch();
 
   // This gives us access to our material UI Theme Object
@@ -67,21 +67,28 @@ export default function Navbar({ user, setIsSidebarOpen,isNonMobile }) {
         {/* LEFT SIDE */}
         <FlexBetween gap="0.5rem">
           {/* Provides styles to a Icon */}
-          {!isNonMobile && <IconButton onClick={() => setIsSidebarOpen((prev) => !prev)}>
-            <MenuIcon />
-          </IconButton>}
-          {/* Since FlexBetween is a Box component therefore we can apply Css properties to it using props instead of using the sx props*/}
-          <FlexBetween
-            borderRadius="9px"
-            gap="3rem"
-            p="0.1rem 1.5rem"
-            backgroundColor={theme.palette.background.alt}
-          >
-            <InputBase placeholder="Search..." />
-            <IconButton>
-              <Search />
+          {!isNonMobile && (
+            <IconButton
+              sx={{ fontSize: "25px" }}
+              onClick={() => setIsSidebarOpen((prev) => !prev)}
+            >
+              <MenuIcon />
             </IconButton>
-          </FlexBetween>
+          )}
+          {/* Since FlexBetween is a Box component therefore we can apply Css properties to it using props instead of using the sx props*/}
+          {isNonMobile && (
+            <FlexBetween
+              borderRadius="9px"
+              gap="3rem"
+              p="0.1rem 1.5rem"
+              backgroundColor={theme.palette.background.alt}
+            >
+              <InputBase placeholder="Search..." />
+              <IconButton>
+                <Search />
+              </IconButton>
+            </FlexBetween>
+          )}
         </FlexBetween>
         {/* Right Side */}
         <FlexBetween gap={"0.25rem"} marginX="5px">

@@ -34,7 +34,7 @@ export default function Layout({ children }) {
    mobile devices*/
   }
   const isNonMobile = useMediaQuery("(min-width: 600px)");
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -53,7 +53,7 @@ export default function Layout({ children }) {
           isSidebarOpen={isSidebarOpen}
           setIsSidebarOpen={setIsSidebarOpen}
         />
-        <Box flexGrow={1} flex={1}>
+        <Box>
           <Navbar
             user={data || {}}
             setIsSidebarOpen={setIsSidebarOpen}
