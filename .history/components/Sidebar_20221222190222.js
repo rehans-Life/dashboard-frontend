@@ -1,0 +1,95 @@
+import React from "react";
+import {
+  Box,
+  Divider,
+  Drawer,
+  IconButton,
+  List,
+  ListenItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+  useTheme,
+} from "@mui/material";
+
+import {
+  SettingsOutlined,
+  ChevronLeft,
+  ChevronRightOutlined,
+  HomeOutlined,
+  ShoppingCartOutlined,
+  Groups2Outlined,
+  ReceiptLongOutlined,
+  PublicOutlined,
+  PointOfSaleOutlined,
+  TodayOutlined,
+  CalendarMonthOutlined,
+  AdminPanelSettingsOutlined,
+  TrendingUpOutlined,
+  PieChartOutlined,
+} from "@mui/icons-material";
+
+import { useEffect, useState } from "react";
+import FlexBetween from "./FlexBetween";
+import { useRouter } from "next/router";
+
+export default function Sidebar({
+  setIsSidebarOpen,
+  isSidebarOpen,
+  isNoneMobile,
+  drawerWidth,
+}) {
+  const router = useRouter();
+  const [active, setActive] = useState("");
+  const theme = useTheme();
+
+  useEffect(() => {
+    setActive(router.pathname);
+  }, [router]);
+
+  {
+    /* For our Sidebar we are going to use the Drawer component 
+    which is made for this kind of stuff */
+  }
+
+  return (
+    <Box>
+      <Drawer
+        open={isSidebarOpen}
+        variant="persistent"
+        anchor="left"
+        sx={{
+          width: drawerWidth,
+          "& .MuiDrawer-paper": {
+            color: theme.palette.secondary[200],
+            boxSizing: "border-box",
+            borderWidth: isNoneMobile ? 0 : "2px",
+            width: drawerWidth,
+            backgroundColor: theme.palette.background.alt,
+          },
+        }}
+      >
+        <Box width="100%">
+          <Box m="1.5rem 2rem 2rem 3rem">
+            <FlexBetween color={theme.palette.secondary.main}>
+              <Box display="flex" alignItems="center" gap="0.5rem">
+                <Typography variant="h4" fontWeight="bold">
+                  ECOMVISION
+                </Typography>
+              </Box>
+              {/* If we are on a mobile screen we wanna give the user
+            the option to be able to close the sidebar as well since
+            there is not much space on the screen*/}
+              {!isNoneMobile && (
+                <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+                  <ChevronLeft />
+                </IconButton>
+              )}
+            </FlexBetween>
+          </Box>
+        </Box>
+      </Drawer>
+    </Box>
+  );
+}

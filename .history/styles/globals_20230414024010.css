@@ -1,0 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+html,
+body {
+  padding: 0;
+  margin: 0;
+  width: 100vw;
+  font-family: "Inter", sans-serif;
+}
+
+/* The width of the srollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* The background of the scrollbar*/
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* This is the handle of the scorllbar */
+::-webkit-scrollbar-thumb {
+  background: #7a7f9d;
+  border-radius: 30px;
+}

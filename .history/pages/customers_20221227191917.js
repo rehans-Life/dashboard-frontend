@@ -1,0 +1,98 @@
+import React from "react";
+import { Box, useTheme } from "@mui/material";
+import { useGetCustomersQuery } from "../redux/api";
+import { DataGrid } from "@mui/x-data-grid";
+import Header from "../components/Header";
+
+export default function Customers() {
+  const { data } = useGetCustomersQuery();
+  const theme = useTheme();
+
+  // While Defininng a column in your Data Grid you have to provide
+  // the columns name to be shown in the Data Grid in the headerName
+  // field. And you also have to specify what field of the datasets
+  // is going to be shown under this column. You have have to
+  // specify its size as well.
+
+  const columns = [
+    {
+      field: "_id",
+      headerName: "ID",
+      flex: 1,
+    },
+    {
+      field: "name",
+      headerName: "Name",
+      flex: 0.5,
+    },
+    {
+      field: "email",
+      headerName: "Email",
+      flex: 1,
+    },
+    {
+      field: "phoneNumber",
+      headerName: "Phone Number",
+      flex: 0.5,
+      // This is the function thats is going to run for each cell in this
+      // column and this functions output for each cell that it ran for is
+      // going to be displayed in the cell itself.
+      renderCell: (params) => {
+        // Updating the values of each cell and formating the number.
+        return params.value.replace(/^(\d{3})(\d{3})(\d{4})/, "($1)$2-$3");
+      },
+    },
+    {
+      field: "country",
+      headerName: "Country",
+      flex: 0.4,
+    },
+    {
+      field: "occupation",
+      headerName: "Occupation",
+      flex: 1,
+    },
+    {
+      field: "role",
+      headerName: "Role",
+      flex: 0.5,
+    },
+  ];
+
+  return (
+    <Box m="1.5rem 2.5rem">
+      <Header title="CUSTOMERS" subtitle="List of Customers" />
+      {/* You need to give the parent component a specific height
+      for it to show up */}
+      <Box
+        mt="40px"
+        height="75vh"
+        sx={{
+          // This is going to remove the border of the data grid.
+          "& .MuiDataGrid-root": {
+            border: "none",
+          },
+          // This removes each border from the bottom of the cell
+          "& .MuiDataGrid-cell": {
+            borderBottom: "none",
+          },
+          // This applies a bluish color onto each cell which is a
+          // header.
+          "& .MuiDataGrid-columnHeaders": {
+            backgroundColor: theme.palette.background.alt,
+          },
+          "& .MuiDataGrid-virtualScroller": {
+            backgroundColor: theme.palette.background.alt,
+          },
+        }}
+      >
+        <DataGrid
+          loading={!data}
+          getRowId={(row) => row._id}
+          rows={data || []}
+          columns={columns || []}
+        />
+      </Box>
+    </Box>
+  );
+}
