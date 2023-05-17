@@ -53,7 +53,7 @@ export default function Layout({ children }) {
           isSidebarOpen={isSidebarOpen}
           setIsSidebarOpen={setIsSidebarOpen}
         />
-        <Box>
+        <Box width="100%">
           <Navbar
             user={data || {}}
             setIsSidebarOpen={setIsSidebarOpen}
